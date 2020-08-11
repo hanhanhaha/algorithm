@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>O(nlogn)-mergeSort</title>
+</head>
+<body>
+<script>
+  var arr = [7,3,9,5,2,8,6,1,4]
+
+  function mergeSort(arr,L,r){
+	  if(L>=r) return
+	  var mid = Math.floor((L+r)/2)
+	  mergeSort(arr,L,mid)
+	  mergeSort(arr,mid+1,r)
+	  merge(arr,L,mid,r)
+  }
+  function merge(arr,L,mid,r){
+	  	var arr_aux = []
+		for(var a=L;a<=r;a++){
+			arr_aux[a-L] = arr[a]
+		}
+		var i = L
+		var j = mid+1
+		for(var k=L;k<=r;k++){
+			if(i>mid){
+				arr[k] = arr_aux[j-L]
+				j++
+			}else if(j>r){
+				arr[k] = arr_aux[i-L]
+				i++
+			}else if(arr_aux[i-L]<arr_aux[j-L]){
+				arr[k] = arr_aux[i-L]
+				i++
+			}else{
+				arr[k] = arr_aux[j-L]
+				j++
+			}
+		}
+		console.log(arr)
+  }
+  console.time('test')
+  mergeSort(arr,0,arr.length-1)
+  console.timeEnd('test')
+</script>
+</body>
+</html>

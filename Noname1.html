@@ -1,0 +1,25 @@
+<!Doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title></title>
+  <style></style>
+  </head>
+ <body> 
+ 
+ <script>
+	function sort(){
+		var arr = [7,3,9,5,2,8,6,1,4]
+		for(var i=1;i<arr.length;i++){
+			var tmp = arr[i]
+			for(var j=i;j>0&&arr[j-1]>tmp;j--){
+					arr[j] = arr[j-1]
+			}
+			arr[j] = tmp
+		}
+		console.log(arr)
+	}
+	sort()
+ </script>
+ </body>
+</html>

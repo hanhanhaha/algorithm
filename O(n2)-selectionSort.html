@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>O(n2)-selectionSort</title>
+</head>
+<body>
+<script>
+function selectionSort(){
+  var arr = [7,3,9,5,2,8,6,1,4]
+  var tmp = null
+/*
+  for (var i = 0;i<arr.length;i++){
+	for (var j = i+1;j<arr.length;j++){
+		if(arr[j]<arr[i]){
+			tmp = arr[i]
+			arr[i] = arr[j]
+			arr[j] = tmp
+		}
+	}
+  }
+ */
+  console.time('test')
+  for(var i = 0;i<arr.length;i++){
+	  // 寻找[i,n)区间的最小值
+	  var minIndex = i
+	  for (var j = i+1;j<arr.length;j++){
+		  if(arr[j]<arr[minIndex]){
+			minIndex = j
+		  }
+	  }
+
+	  tmp = arr[i]
+	  arr[i] = arr[minIndex]
+	  arr[minIndex] = tmp
+  }
+  console.timeEnd('test')
+  console.log(arr)
+}
+selectionSort()
+</script>
+</body>
+</html>

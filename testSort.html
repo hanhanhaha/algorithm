@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<script>
+	// 在限定的范围内生成随机数
+ function randomNumberInGivenRange(start,end){
+	var num = Math.random()
+	var randomNumber = Math.floor(num * (end-start+1) + start)
+	return randomNumber
+ }
+
+ function randomArray(size,start,end){
+	var arr = []
+	for(var i=0;i<size;i++){
+		arr[i] = randomNumberInGivenRange(start,end)
+	}
+	return arr
+ }
+ console.time('createArray')
+ var arr = randomArray(1000000,0,100000)
+ console.timeEnd('createArray')
+ console.time('copyArray')
+ var arr_1 = JSON.parse(JSON.stringify(arr)) 
+ console.timeEnd('copyArray')
+ var arr_2 = JSON.parse(JSON.stringify(arr))
+ var arr_3 = JSON.parse(JSON.stringify(arr))
+
+ 
+
+function selectionSort(arr){
+	var tmp
+	for(var i=0;i<arr.length;i++){
+		var minIndex = i
+		for(var j=i+1;j<arr.length;j++){
+			if(arr[j]<arr[minIndex]){
+				minIndex = j
+			}
+		}
+		tmp = arr[i]
+		arr[i] = arr[minIndex]
+		arr[minIndex] = tmp
+	}
+}
+
+
+function insertSort(arr){
+	var tmp
+	for(var i=1;i<arr.length;i++){
+		for(var j=i;j>0&&arr[j-1]>arr[j];j--){
+			tmp = arr[j]
+			arr[j] = arr[j-1]
+			arr[j-1] = tmp
+		}
+	}
+}
+
+function insertSort_extend(arr){
+	for(var i=1;i<arr.length;i++){
+		var tmp = arr[i]
+		var j
+		for(j=i;j>0&&arr[j-1]>tmp;j--){
+			arr[j] = arr[j-1]
+		}
+		arr[j] = tmp
+	}
+}
+
+
+function mergeSort(arr,L,r){
+	  if(L>=r) return
+	  var mid = Math.floor((L+r)/2)
+	  mergeSort(arr,L,mid)
+	  mergeSort(arr,mid+1,r)
+	  merge(arr,L,mid,r)
+}
+function merge(arr,L,mid,r){
+	  	var arr_aux = []
+		for(var a=L;a<=r;a++){
+			arr_aux[a-L] = arr[a]
+		}
+		var i = L
+		var j = mid+1
+		for(var k=L;k<=r;k++){
+			if(i>mid){
+				arr[k] = arr_aux[j-L]
+				j++
+			}else if(j>r){
+				arr[k] = arr_aux[i-L]
+				i++
+			}else if(arr_aux[i-L]<arr_aux[j-L]){
+				arr[k] = arr_aux[i-L]
+				i++
+			}else{
+				arr[k] = arr_aux[j-L]
+				j++
+			}
+		}
+ }
+ 
+/* 
+ console.time('insertSort')
+ insertSort(arr)
+ console.timeEnd('insertSort')
+ console.log(arr)
+
+ console.time('insertSort_extend')
+ insertSort_extend(arr_1)
+ console.timeEnd('insertSort_extend')
+ console.log(arr_1)
+*/
+ console.time('mergeSort')
+ mergeSort(arr_2,0,arr_2.length-1)
+ console.timeEnd('mergeSort')
+ console.log(arr_2)
+
+/*
+ console.time('selectionSort')
+ selectionSort(arr_3)
+ console.timeEnd('selectionSort')
+ console.log(arr_3)
+
+ */
+
+
+</script>
+</body>
+</html>

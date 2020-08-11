@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>O(n2)-InsertionSort(非交换)</title>
+</head>
+<body>
+<script>
+	插入排序能够提前终止内层循环，大大提升效率
+	function insertionSort(){
+		var arr = [7,3,9,5,2,8,6,1,4]
+		console.time('test')
+		for(var i=1;i<arr.length;i++){
+			var tmp = arr[i] 
+//			i:3 tmp:5
+			var j
+			for(j=i;j>0&&arr[j-1]>tmp;j--){
+//				 if(j===0){
+//					arr[i] = tmp
+//				 }
+//				j:1 arr[j-1]:7 tmp:5
+//				if(arr[j-1]>tmp){
+				arr[j] = arr[j-1]
+//				}
+			}
+			arr[j] = tmp
+		}
+		console.timeEnd('test')
+		console.log(arr)
+	}
+	insertionSort()
+//	64043047
+</script>
+</body>
+</html>
